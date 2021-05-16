@@ -3,8 +3,11 @@ package com.devedu.decatalog.services;
 import com.devedu.decatalog.dto.CategoryDTO;
 import com.devedu.decatalog.entities.Category;
 import com.devedu.decatalog.repositories.CategoryRepository;
+import com.devedu.decatalog.services.exceptions.DatabaseException;
 import com.devedu.decatalog.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +56,16 @@ public class CategoryService {
             return new CategoryDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id " + id + " not found");
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Id " + id + " not found");
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
         }
     }
 }
