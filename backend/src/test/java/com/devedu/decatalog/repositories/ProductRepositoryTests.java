@@ -1,7 +1,6 @@
 package com.devedu.decatalog.repositories;
 
 import com.devedu.decatalog.entities.Product;
-import com.devedu.decatalog.services.exceptions.ResourceNotFoundException;
 import com.devedu.decatalog.tests.Factory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
