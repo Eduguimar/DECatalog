@@ -3,7 +3,9 @@ package com.devedu.decatalog.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -19,6 +21,9 @@ public class Category implements Serializable {
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -42,6 +47,10 @@ public class Category implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public Instant getCreatedAt() {
