@@ -4,6 +4,10 @@ import com.devedu.decatalog.entities.Category;
 import com.devedu.decatalog.entities.Product;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -12,10 +16,17 @@ import java.util.Set;
 
 public class ProductDTO implements Serializable {
     private Long id;
+
+    @Size(min = 4, max = 150, message = "Nome deve possuir entre 4 e 150 caracteres")
+    @NotBlank(message = "Campo obrigatório")
     private String name;
     private String description;
+
+    @Positive(message = "Preço dever ser um valor positivo")
     private Double price;
     private String imgUrl;
+
+    @PastOrPresent(message = "A data não pode ser futura")
     private Instant date;
 
     private List<CategoryDTO> categories = new ArrayList<>();

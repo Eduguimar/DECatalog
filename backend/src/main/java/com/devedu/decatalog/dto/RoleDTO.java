@@ -2,11 +2,14 @@ package com.devedu.decatalog.dto;
 
 import com.devedu.decatalog.entities.Role;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class RoleDTO implements Serializable {
 
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String authority;
 
     public RoleDTO() {

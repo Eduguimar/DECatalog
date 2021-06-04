@@ -2,10 +2,13 @@ package com.devedu.decatalog.dto;
 
 import com.devedu.decatalog.entities.Category;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class CategoryDTO implements Serializable {
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String name;
 
     public CategoryDTO() {
