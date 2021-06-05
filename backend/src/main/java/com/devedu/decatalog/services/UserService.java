@@ -3,6 +3,7 @@ package com.devedu.decatalog.services;
 import com.devedu.decatalog.dto.RoleDTO;
 import com.devedu.decatalog.dto.UserDTO;
 import com.devedu.decatalog.dto.UserInsertDTO;
+import com.devedu.decatalog.dto.UserUpdateDTO;
 import com.devedu.decatalog.entities.Role;
 import com.devedu.decatalog.entities.User;
 import com.devedu.decatalog.repositories.RoleRepository;
@@ -59,7 +60,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getOne(id);
             copyDtoToEntity(dto, entity);
