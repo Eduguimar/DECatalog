@@ -1,5 +1,6 @@
 import './styles.css';
 import ProductImg from 'assets/images/product.png';
+import ProductPrice from 'components/ProductPrice/ProductPrice';
 
 export default function ProductCard() {
   return (
@@ -9,7 +10,7 @@ export default function ProductCard() {
       </div>
       <div className="card-bottom-container">
         <h6>Nome do porudot</h6>
-        <p>R$1234,97</p>
+        <ProductPrice />
       </div>
     </div>
   );
