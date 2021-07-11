@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Navbar />
       <div className="home-container">
-        <div className="home-card">
+        <div className="base-card home-card">
           <div className="home-content-container">
             <div>
               <h1>Conheça o nosso catálogo de produtos</h1>
