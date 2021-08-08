@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,7 @@ public class ProductServiceTests {
     private ProductDTO productDTO;
     private Category category;
     private String fakeName;
+    private List<Category> categories;
 
     @BeforeEach
     void setUp() {
@@ -60,11 +62,13 @@ public class ProductServiceTests {
         category = Factory.createCategory();
         page = new PageImpl<>(List.of(product));
         fakeName = "";
+        categories = new ArrayList<>();
 
         when(repository.findAll(ArgumentMatchers.any(Pageable.class))).thenReturn(page);
         when(repository.save(ArgumentMatchers.any())).thenReturn(product);
         when(repository.findById(existingId)).thenReturn(Optional.of(product));
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
+        when(repository.find(ArgumentMatchers.any(), ArgumentMatchers.any(), ArgumentMatchers.any(Pageable.class))).thenReturn(page);
         when(repository.getOne(existingId)).thenReturn(product);
         when(repository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
         when(categoryRepository.getOne(existingId)).thenReturn(category);
@@ -81,8 +85,6 @@ public class ProductServiceTests {
         Page<ProductDTO> result = service.findAllPaged(existingId, fakeName, pageable);
 
         Assertions.assertNotNull(result);
-
-        verify(repository, times(1)).findAll(pageable);
     }
 
     @Test
