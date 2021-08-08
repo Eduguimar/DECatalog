@@ -1,6 +1,7 @@
 package com.devedu.decatalog.resources;
 
 import com.devedu.decatalog.dto.ProductDTO;
+import com.devedu.decatalog.entities.Category;
 import com.devedu.decatalog.services.ProductService;
 import com.devedu.decatalog.services.exceptions.DatabaseException;
 import com.devedu.decatalog.services.exceptions.ResourceNotFoundException;
@@ -41,6 +42,7 @@ public class ProductResourceTests {
     private long nonExistingId;
     private long dependentId;
     private ProductDTO productDTO;
+    private Category category;
     private PageImpl<ProductDTO> page;
 
     @BeforeEach
@@ -49,9 +51,10 @@ public class ProductResourceTests {
         nonExistingId = 2L;
         dependentId = 3L;
         productDTO = Factory.createProductDTO();
+        category = Factory.createCategory();
         page = new PageImpl<>(List.of(productDTO));
 
-        Mockito.when(service.findAllPaged(any())).thenReturn(page);
+        Mockito.when(service.findAllPaged(existingId, any())).thenReturn(page);
         Mockito.when(service.findById(existingId)).thenReturn(productDTO);
         Mockito.when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
         Mockito.when(service.insert(any())).thenReturn(productDTO);
