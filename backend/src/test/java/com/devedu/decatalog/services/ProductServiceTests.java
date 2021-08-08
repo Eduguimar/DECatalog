@@ -48,6 +48,7 @@ public class ProductServiceTests {
     private Product product;
     private ProductDTO productDTO;
     private Category category;
+    private String fakeName;
 
     @BeforeEach
     void setUp() {
@@ -58,6 +59,7 @@ public class ProductServiceTests {
         productDTO = Factory.createProductDTO();
         category = Factory.createCategory();
         page = new PageImpl<>(List.of(product));
+        fakeName = "";
 
         when(repository.findAll(ArgumentMatchers.any(Pageable.class))).thenReturn(page);
         when(repository.save(ArgumentMatchers.any())).thenReturn(product);
@@ -76,7 +78,7 @@ public class ProductServiceTests {
     @Test
     public void findAllPagedShouldReturnPage() {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<ProductDTO> result = service.findAllPaged(existingId, pageable);
+        Page<ProductDTO> result = service.findAllPaged(existingId, fakeName, pageable);
 
         Assertions.assertNotNull(result);
 
