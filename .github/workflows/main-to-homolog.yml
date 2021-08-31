@@ -50,22 +50,22 @@ jobs:
 #      - name: Check AWS authentication
 #        run: aws sts get-caller-identity
 
-      - name: Echo version to S3
-        run: echo aws s3 cp --quiet ./target/$BUNDLE_NAME s3://$EB_BUCKET/$EB_VERSION_KEY
-        working-directory: backend
+#      - name: Echo version to S3
+#        run: echo aws s3 cp --quiet ./target/$BUNDLE_NAME s3://$EB_BUCKET/$EB_VERSION_KEY
+#        working-directory: backend
 
-      - name: Copy version to S3
-        run: aws s3 cp --quiet ./target/$BUNDLE_NAME s3://$EB_BUCKET/$EB_VERSION_KEY
-        working-directory: backend
+#      - name: Copy version to S3
+#        run: aws s3 cp --quiet ./target/$BUNDLE_NAME s3://$EB_BUCKET/$EB_VERSION_KEY
+#        working-directory: backend
 
-      - name: Create EB Application Version
-        run: aws elasticbeanstalk create-application-version --application-name $EB_APP --version-label "$EB_VERSION" --source-bundle "S3Bucket=$EB_BUCKET,S3Key=$EB_VERSION_KEY"
-        working-directory: backend
-        env:
-          EB_VERSION_KEY: ${{ github.sha }}/${{ secrets.BUNDLE_NAME }}
+#      - name: Create EB Application Version
+#        run: aws elasticbeanstalk create-application-version --application-name $EB_APP --version-label "$EB_VERSION" --source-bundle "S3Bucket=$EB_BUCKET,S3Key=$EB_VERSION_KEY"
+#        working-directory: backend
+#        env:
+#          EB_VERSION_KEY: ${{ github.sha }}/${{ secrets.BUNDLE_NAME }}
 
-      - name: Update Elastic Beanstalk Environment
-        run:  aws elasticbeanstalk update-environment --application-name $EB_APP --environment-name "$EB_ENV" --version-label "$EB_VERSION"
-        working-directory: backend
+#      - name: Update Elastic Beanstalk Environment
+#        run:  aws elasticbeanstalk update-environment --application-name $EB_APP --environment-name "$EB_ENV" --version-label "$EB_VERSION"
+#        working-directory: backend
 
-      - run: echo "done main to homolog"
+#      - run: echo "done main to homolog"
