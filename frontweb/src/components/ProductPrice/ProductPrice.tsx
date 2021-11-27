@@ -1,10 +1,14 @@
 import './styles.css';
 
-export default function ProductPrice() {
+type Props = {
+  price: number;
+};
+
+export default function ProductPrice({ price }: Props) {
   return (
     <div className="product-price-container">
       <span>R$</span>
-      <h3>2345,56</h3>
+      <h3>{price}</h3>
     </div>
   );
 }
