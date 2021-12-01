@@ -3,7 +3,7 @@ import Admin from 'pages/Admin/Admin';
 import Catalog from 'pages/Catalog/Catalog';
 import Home from 'pages/Home/Home';
 import ProductDetails from 'pages/ProductDetails/ProductDetails';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 export default function Routes() {
   return (
@@ -19,6 +19,7 @@ export default function Routes() {
         <Route path="/products/:productId">
           <ProductDetails />
         </Route>
+        <Redirect from="/admin" to="/admin/products" exact />
         <Route path="/admin">
           <Admin />
         </Route>
