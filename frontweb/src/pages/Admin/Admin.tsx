@@ -1,7 +1,11 @@
+import Navbar from './Navbar/Navbar';
+
 export default function Admin() {
   return (
-    <div>
-      <h1>Admin Page!</h1>
+    <div className="admin-container">
+      <Navbar />
+      <div className="admin-content"></div>
+      <h1>Conteúdo</h1>
     </div>
   );
 }
